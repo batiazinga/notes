@@ -1,0 +1,44 @@
+\documentclass[a4paper,11pt]{article}
+
+
+\usepackage[right=3cm,left=3cm,top=3cm,bottom=3cm]{geometry}
+\usepackage{amsfonts}
+\usepackage{graphicx}
+\usepackage{amsmath,amssymb,mathrsfs,dsfont}
+
+
+% commands for derivatives
+\newcommand{\diff}[2]{\ensuremath{\frac{\mathrm{d} #1}{\mathrm{d} #2}}}
+\newcommand{\difftwo}[2]{\ensuremath{\frac{\mathrm{d}^{2} #1}{\mathrm{d} #2 ^{2} }}}
+\newcommand{\dpart}[2]{\ensuremath{\frac{\partial #1}{\partial #2}}}
+\newcommand{\dparttwo}[2]{\ensuremath{\frac{\partial^2 #1}{\partial #2 ^2}}}
+\newcommand{\ud}{\ensuremath{\mathrm{d}}}
+
+% commands for exponential
+\newcommand{\expcompl}[1]{\ensuremath{\mathrm{e}^{\mathrm{i} #1 }}}
+\newcommand{\expo}[1]{\ensuremath{\mathrm{e}^{ #1 }}}
+\newcommand{\ic}{\ensuremath{\mathrm{i}}}
+
+\newcommand{\vect}[1]{\ensuremath{\mathbf{ #1 }}}
+
+% commands for quantum physics
+\newcommand{\ket}[1]{\ensuremath{\left| #1 \right\rangle}}
+\newcommand{\bra}[1]{\ensuremath{\left\langle #1 \right|}}
+\newcommand{\braket}[2]{\ensuremath{\left\langle #1 \, \right| \left. \! #2 \right\rangle}}
+\newcommand{\commute}[2]{\ensuremath{\left[ #1 , #2 \right]}}
+
+
+\title{Notes on Decoherence}
+\author{Luc Nguyen-th\^e}
+
+\begin{document}
+\maketitle
+
+\tableofcontents
+
+%-----------------------------------
+\include{section1}
+\include{section2}
+%-----------------------------------
+
+\end{document}

@@ -1,0 +1,75 @@
+\section{Real and reciprocal space}
+
+We model space as a cubic box with width $L$, periodic boundary conditions and inner product
+\begin{equation}
+	(f, g) \mapsto \int \ud\vect{r} \, f^{\ast}(\vect{r}) g(\vect{r}) .
+	\nonumber
+\end{equation}
+The eigenvector (with eigenvalue $\vect{p}$) of the momentum operator $\hat{\vect{p}}$ is a (normalized) plane wave. Its projection on the real space basis is
+\begin{equation}
+	\braket{\vect{r}}{\vect{p}} = \frac{1}{\sqrt{V}} \, \expcompl{\vect{r}.\vect{p}/\hbar} ,
+	\nonumber
+\end{equation}
+where $V = L^3$.
+Due to boundary conditions, momenta are quantified
+\begin{equation}
+	\vect{p} = \frac{2\pi\hbar}{L} \, \left( n_x \vect{e}_x  + n_y \vect{e}_y + n_z \vect{e}_z \right) ,
+	\nonumber
+\end{equation}
+where $n_i$ are integers (note that because real space is cubic, we use the same basis to decompose real and reciprocal vectors), \textit{i.e.}, each momentum $\vect{p}$ occupies an elementary cell with volume $(2\pi\hbar)^3/V$ in reciprocal space.
+As $L$ increases, this lattice becomes denser and can be approximated by a continuum.
+Sums over the lattice are then approximated by integrals
+\begin{equation}
+	\sum_{\vect{p}} \rightarrow \frac{V}{(2\pi\hbar)^3} \, \int \ud\vect{p} ,
+	\nonumber
+\end{equation}
+and eigenvectors of the momentum operator become
+\begin{equation}
+	\label{eq:planeWave}
+	\braket{\vect{r}}{\vect{p}} \rightarrow \frac{1}{(2\pi\hbar)^{3/2}} \, \expcompl{\vect{r}.\vect{p}/\hbar} .
+\end{equation}
+
+A state of the system can be decomposed on the real and reciprocal basis
+\begin{equation}
+	\label{eq:decomposition}
+	\ket{\psi} = \int \ud\vect{r} \,\psi(\vect{r}) \ket{\vect{r}}
+	= \int \ud\vect{p} \,\tilde{\psi}(\vect{p}) \ket{\vect{p}} ,
+\end{equation}
+where $\psi$ and $\tilde{\psi}$ are normalized.
+From this we can see that the reciprocal space decomposition is the Fourier transform of the real space one (and reciprocally)
+\begin{align}
+	\braket{\vect{p}}{\psi} = \tilde{\psi}(\vect{p}) &
+	= \frac{1}{(2\pi\hbar)^{3/2}} \int \ud\vect{r} \,\psi(\vect{r}) \, \expo{-\ic\vect{r}.\vect{p}/\hbar} \\
+	\braket{\vect{r}}{\psi} = \psi(\vect{r}) &
+	= \frac{1}{(2\pi\hbar)^{3/2}} \int \ud\vect{p} \, \tilde{\psi}(\vect{p}) \, \expcompl{\vect{r}.\vect{p}/\hbar} .
+\end{align}
+Note that $\psi$ has dimension $[\text{length}]^{-3/2}$ and $\tilde{\psi}$ has dimension $[\text{momentum}]^{-3/2}$. Also, projecting onto $\ket{\vect{r}}$ ($\ket{\vect{p}}$) brings a dimension $[\text{length}]^{-3/2}$ ($[\text{momentum}]^{-3/2}$).
+
+An important property of the Fourier transform is that it exchanges localization and delocalization. For example, the Fourier transform of the real space uniform wave function is a kronecker, or a dirac in the continuum limit, in reciprocal space
+\begin{equation}
+	\label{eq:pDirac}
+	\int \ud\vect{r} \, \expo{-\ic\vect{r}.\vect{p}/\hbar} = V \, \delta_{\vect{p},0}
+	\rightarrow (2\pi\hbar)^3 \, \delta(\vect{p}) .
+\end{equation}
+Conversely, the inverse Fourier transform of a uniform reciprocal space wave function is dirac.
+To prove this, we first compute the inverse discrete Fourier transform in the quantized reciprocal space and we obtain a (cubic) dirac comb
+\begin{equation}
+	\frac{(2\pi\hbar)^3}{V} \sum_{\vect{p}} \expcompl{\vect{r}.\vect{p}/\hbar} =
+	(2\pi\hbar)^3 \sum_{\vect{n}} \delta(\vect{r} - L\vect{n}) ,
+	\nonumber
+\end{equation}
+where $\vect{n} = n_x \vect{e}_x  + n_y \vect{e}_y + n_z \vect{e}_z$.
+Note that only one dirac has its support in the cube containing space so the dirac comb can effectively be replaced by a single dirac.
+In the continuum limit this becomes
+\begin{equation}
+	\label{eq:rDirac}
+	\int \ud\vect{p} \,\expcompl{\vect{r}.\vect{p}/\hbar} =
+	(2\pi\hbar)^3 \,\delta(\vect{r}) .
+\end{equation}
+
+An other important property of the Fourier transform is that it exchanges convolution and product
+\begin{equation}
+	\label{eq:convolutionFourier}
+	(\tilde{f} \ast \tilde{g})(\vect{p}) = \int \ud\vect{q} \, \tilde{f}(\vect{q}) \tilde{g}(\vect{p}-\vect{q}) =
+	\int \ud\vect{u} \, f(\vect{u}) g(\vect{u}) \expo{-\ic\vect{u}.\vect{p}/\hbar} = \widetilde{(f g)}(\vect{p}) .
+\end{equation}

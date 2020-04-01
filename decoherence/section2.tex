@@ -1,0 +1,159 @@
+\section{Wigner distribution}
+
+The Wigner distribution of a spin-less particule is defined as
+\begin{equation}
+	\label{eq:Wigner}
+	w(\vect{r}, \vect{p}) = \frac{1}{(2\pi\hbar)^3} \int \ud\vect{u} \, \rho\left( \vect{r}-\frac{\vect{u}}{2} , \vect{r}+\frac{\vect{u}}{2} \right) \expcompl{\vect{u}.\vect{p}/\hbar} ,
+\end{equation}
+where $\rho(\vect{u},\vect{v}) = \bra{\vect{u}} \hat{\rho} \ket{\vect{v}}$ is the density matrix in real space.
+
+In the following, we are going to explicitly compute this Wigner distribution in the real and reciprocal space representations.
+We will focus on pure states only since this is enough to compute the Wigner distribution of any statistical mixture. Indeed, if the system is in a statistical mixture of pure states, the density matrix is just the linear superposition of pure states density matrices $\hat{\rho} = \sum_i \pi_i \hat{\rho}_i$ where $\pi_i$ are probabilities. The Wigner distribution is then also the linear superposition of the pure states Wigner distributions.
+We will also derive its motion equation.
+
+
+
+\subsection{Real space representation}
+
+We now assume that the system is in a pure state $\ket{\psi}$.
+From its real space representation in Eq.~(\ref{eq:decomposition}) we compute the real space representation of the density matrix
+\begin{equation}
+	\label{eq:rDensityMatrix}
+	\hat{\rho} = \int \ud\vect{r'}\ud\vect{r''} \psi(\vect{r'}) \psi(\vect{r''})^{\ast} \ket{\vect{r'}}\bra{\vect{r''}} .
+\end{equation}
+Injecting Eq.~(\ref{eq:rDensityMatrix}) into Eq.~(\ref{eq:Wigner}) yields
+\begin{equation}
+	\label{eq:rWigner}
+	w(\vect{r}, \vect{p}) = \frac{1}{(2\pi\hbar)^3} \int \ud\vect{u} \, \psi\left( \vect{r}-\frac{\vect{u}}{2} \right) \psi\left( \vect{r}+\frac{\vect{u}}{2} \right) \expcompl{\vect{u}.\vect{p}/\hbar} .
+\end{equation}
+
+
+
+\subsection{Reciprocal space representation}
+
+We now decompose the pure state $\ket{\psi}$ on the momentum basis in the continuum limit.
+Using Eq.~(\ref{eq:decomposition}), the density matrix reads
+\begin{equation}
+	\label{eq:pDensityMatrix}
+	\hat{\rho} = \int \ud\vect{p'}\ud\vect{p''} \psi(\vect{p'}) \psi(\vect{p''})^{\ast} \ket{\vect{p'}}\bra{\vect{p''}} .
+\end{equation}
+Injecting Eq.~(\ref{eq:pDensityMatrix}) into Eq.~(\ref{eq:Wigner}) and using relation~(\ref{eq:pDirac}) yields
+\begin{equation}
+	\label{eq:pWigner}
+	w(\vect{r}, \vect{p}) = \frac{1}{(4\pi\hbar)^3} \int \ud\vect{q} \, \tilde{\psi}\left( \vect{p}+\frac{\vect{q}}{2} \right) \tilde{\psi}\left( \vect{p}-\frac{\vect{q}}{2} \right) \expcompl{\vect{r}.\vect{q}/\hbar} ,
+\end{equation}
+where we had to exchange real and reciprocal space integrations.
+
+
+
+\subsection{Motion equation}
+
+We now focus on the evolution of the Wigner distribution. We first derive a general differential (in the absence of an electromagnetic field) and compare it with its classical counterpart, the Liouville equation. We then consider simple examples where the two equations are identical.
+
+
+\subsubsection{Equation}
+
+Let's consider a particule with mass $m$ subject to potential $V(\vect{r})$ initially in the state $\ket{\psi}$. In the Schrodinger representation the density matrix is the solution of
+\begin{equation}
+	\label{eq:evolutionDensityMatrix}
+	\diff{}{t} \hat{\rho} = \frac{1}{\ic\hbar}\commute{\hat{H}}{\hat{\rho}} ,
+\end{equation}
+with initial condition $\rho(t=0) = \ket{\psi}\bra{\psi}$ and with Hamiltonian
+\begin{equation}
+	\label{eq:Hamiltonian}
+	\hat{H} = \frac{\hat{\vect{p}}^2}{2m} + V(\hat{\vect{r}}) .
+\end{equation}
+
+We first compute the time evolution due to the kinetic part of the Hamiltonian, \textit{i.e.}, we compute the evolution of a free particle.
+The commutator in Eq.~(\ref{eq:evolutionDensityMatrix}) is
+\begin{equation}
+	\commute{\hat{H}_{\text{free}}}{\hat{\rho}} =
+	\frac{1}{2m} \int \ud\vect{p'}\ud\vect{p''} \, \tilde{\psi}(\vect{p'}) \tilde{\psi}(\vect{p''})^{\ast} \ket{\vect{p'}} \bra{\vect{p''}} \left(\vect{p'}^2 - \vect{p''}^2\right) ,
+	\nonumber
+\end{equation}
+where time dependence of $\tilde{\psi}$ is implicit.
+The time derivative of the Wigner distribution is then
+\begin{equation}
+	\left.\dpart{w}{t}\right|_{\text{free}} = 
+	- \frac{\vect{p}}{m} \left[ \frac{\hbar}{\ic} \frac{1}{(4\pi\hbar)^3}
+	\int \ud\vect{q} \,\vect{q} \, \tilde{\psi}\left( \vect{p}+\frac{\vect{q}}{2} \right) \tilde{\psi}\left( \vect{p}-\frac{\vect{q}}{2} \right) \expcompl{\vect{r}.\vect{q}/\hbar} \right] .
+	\nonumber
+\end{equation}
+From Eq.~(\ref{eq:pWigner}) we can see that the integral in the right-hand side is proportional to the gradient (over real space coordinates) of the Wigner distribution.
+The Wigner distribution of a single free particle thus satisfies
+\begin{equation}
+	\label{eq:freeEvolution}
+	\left.\dpart{w}{t}\right|_{\text{free}} + \frac{1}{m} \vect{p}.\nabla_{\vect{r}} w = 0 .
+\end{equation}
+We now compute the time evolution due to the potential.
+The commutator between the potential and the density matrix is
+\begin{equation}
+	\commute{V(\hat{\vect{r}})}{\hat{\rho}} =
+	\int \ud\vect{r'}\ud\vect{r''} \, \psi(\vect{r'}) \psi(\vect{r''})^{\ast} \ket{\vect{r'}} \bra{\vect{r''}} \left(V(\vect{r'}) - V(\vect{r''})\right) .
+	\nonumber
+\end{equation}
+The potential's contribution to the Wigner distribution time evolution is then
+\begin{equation}
+	\left.\dpart{w}{t}\right|_{\text{potential}} =
+	\frac{1}{\ic\hbar} \frac{1}{(2\pi\hbar)^3}
+	\int \ud\vect{u} \, \psi\left( \vect{r}-\frac{\vect{u}}{2} \right) \psi\left( \vect{r}+\frac{\vect{u}}{2} \right)^{\ast} \, \left[ V\left( \vect{r}-\frac{\vect{u}}{2} \right) - V\left(\vect{r}+\frac{\vect{u}}{2}\right) \right] \expcompl{\vect{u}.\vect{p}/\hbar}
+	\nonumber
+\end{equation}
+where we recognize the Fourier transform of a product. Using Eq.~(\ref{eq:convolutionFourier}) we can express the right-hand side of the previous expression as a convolution product of the Wigner distribution and a Kernel
+\begin{equation}
+	\label{eq:potentialEvolution}
+	\left.\dpart{w}{t}\right|_{\text{potential}} =
+	\int \ud\vect{q} \, \mathcal{N}(\vect{r},\vect{q}) w(\vect{r}, \vect{p}-\vect{q}) ,
+\end{equation}
+where the Kernel $\mathcal{N}$ is given by
+\begin{equation}
+	\label{eq:kernel}
+	\mathcal{N}(\vect{r},\vect{q}) =
+	\frac{1}{\ic\hbar} \frac{1}{(2\pi\hbar)^3} \int \ud\vect{u} \, \left[ V\left(\vect{r}-\frac{\vect{u}}{2}\right) - V\left( \vect{r} + \frac{\vect{u}}{2} \right) \right] \expcompl{\vect{u}.\vect{q}/\hbar} .
+\end{equation}
+Finally, the time evolution of the Wigner distribution of a particle with Hamiltonian (\ref{eq:Hamiltonian}) is
+\begin{equation}
+	\label{eq:evolution}
+	\dpart{w}{t} + \frac{1}{m} \vect{p}.\nabla_{\vect{r}} w =
+	\int \ud\vect{q} \, \mathcal{N}(\vect{r},\vect{q}) w(\vect{r}, \vect{p}-\vect{q}) .
+\end{equation}
+This result can be compared to its classical counterpart: the probability distribution $f$ of a single particle with (classical) Hamiltonian (\ref{eq:Hamiltonian}) obeys the Liouville equation
+\begin{equation}
+	\label{eq:Liouville}
+	\dpart{f}{t} + \nabla_{\vect{p}} H . \nabla_{\vect{r}} f - \nabla_{\vect{r}} H . \nabla_{\vect{p}} f = 0 .
+\end{equation}
+The first two terms of equations (\ref{eq:evolution}) and (\ref{eq:Liouville}) have the same structure, \textit{i.e.} the two distributions obey the same equation for a free particle. Only the third term, \textit{i.e.} the potential contribution, is different.
+
+
+\subsubsection{`Classical' potentials}
+
+We now consider three particular potentials where equations (\ref{eq:evolution}) and (\ref{eq:Liouville}) have exactly the same structure: linear, quadratic and slowly varying potentials.
+
+A general linear potential is defined as
+\begin{equation}
+	V(\vect{r}) = \vect{a}.(\vect{r}-\vect{r}_0) .
+	\nonumber
+\end{equation}
+Its kernel is
+\begin{equation}
+	\label{eq:linearKernel}
+	\mathcal{N}(\vect{r},\vect{q}) =
+	\vect{a}.\nabla_{\vect{q}} \delta(\vect{q}) .
+\end{equation}
+With $\vect{a} = \nabla_{\vect{r}}V$ and integrating by part, motion equation for the Wigner distribution reduces to the Liouville equation.
+
+The case of the quadratic potential is very similar.
+Its general form is
+\begin{equation}
+	V(\vect{r}) = (\vect{r}-\vect{r}_0) A (\vect{r}-\vect{r}_0) ,
+	\nonumber
+\end{equation}
+where $A$ is a positive symmetric matrix. The positivity ensures that the potential is attractive in all directions.
+Its kernel is
+\begin{equation}
+	\label{eq:quadraticKernel}
+	\mathcal{N}(\vect{r},\vect{q}) =
+	(\vect{r}-\vect{r}_0) A \nabla_{\vect{q}} \delta(\vect{q}) .
+\end{equation}
+With $A (\vect{r}-\vect{r}_0) = \nabla_{\vect{r}}V$ and the same integration by part as for the linear potential, motion equation for the Wigner distribution reduces to the Liouville equation.
+
