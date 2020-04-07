@@ -1,0 +1,54 @@
+\section{Ramsey theory}
+
+First some fun with notations and limit cases.
+
+Let's define $R_1(s)$ the "Ramsey number for a 1-colouring",
+\textit{i.e.} the smallest integer $n$ such that every 1-colouring of $K_n$ yields a monochromatic $K_s$.
+It obviously satisfies $R_1(s) = s$, which is equal to $R_2(s,2)$. And more generally
+\begin{equation}
+    R_k(s_1,\dots,s_{k-1},2) = R_{k-1}(s_1,\dots,s_{k-1}) ,
+    \nonumber
+\end{equation}
+where $k \geq 2$. Accepting a complete graph of order 2 for some colour brings no additional constraint on the order of the graph so this colour can be ignored.
+Defining $R_1$ has no real interest except that it makes the previous relation more regular (no need to make a special case for $k=2$).
+To make this even more regular, could we define $R_0() = 2$? But what would this mean?
+
+We've just seen that the case $s_i = 2$ brings no additional constraint. What about a $s_i = 1$? It should bring even less constraint.
+For every $n$, for every colouring there is always a (in fact $n$) monochromatic $K_1$ so
+\begin{equation}
+    R_k(1,\dots)=1 ,
+    \nonumber
+\end{equation}
+for $k \geq 1$.
+This condition brings so much less constraint to the problem that there is no more contraint and any $n$ satisfies it.
+
+
+The situation is similar for hypergraphs made of all \emph{r-tuples} on a set $X$.
+We just have to replace 2 by $r$ and 1 by $\min_i s_i < r$.
+Previous equation generalizes as follows
+\begin{align}
+    R_k^{(r)}(s_1,\dots,s_{k-1},r) & = R_{k-1}^{(r)}(s_1,\dots,s_{k-1}) \nonumber \\
+    R_k^{(r)}(s_1,\dots,s_1) & = \min_i s_i \qquad \text{if} \min_i s_i < r . \nonumber
+\end{align}
+
+\subsection{Theorem 1}
+
+Here is how I tried to prove the first part of theorem 1.
+
+Let's consider two 2-colourings on $K_{n_1}$ and $K_{n_2}$ with $n_1 = R(s-1,t)$ and $n_2 = R(s,t-1)$ and build a 2-colouring on $K_{n_1 + n_2}$ from them.
+If the first graph contains a blue subgraph of size $t$ or the second graph contains a red subgraph of size $s$ then we are done.
+Otherwise, they contain respectively a red subgraph of size $s-1$ and a blue subgraph of size $t-1$.
+I now want to prove that when we connect graphs $K_{n_1}$ and $K_{n_2}$,
+either the red $K_{s-1]}$ is connected (with only red edges) to a vertex of $K_{n_2}$ to yield a red $K_s$
+or the blue $K_{t-1}$ is connected (with with only blue edges) to a vertex of $K_{n_1}$ to yield a blue $K_t$.
+
+Let's assume that there is no vertex in $K_{n_2}$ that can be connected to $K_{s-1}$ with only red edges.
+Then for every vertex in $K_{n_2}$ there is at least one blue edge to $K_{s-1}$.
+How can this guarantee that there is a vertex in $K_{n_1}$ connected to $K_{t-1}$ with only blue edges?
+I don't think it can so my proof seems to be doomed.
+
+I think the problem with my (tentative of) proof is that I forced an extra partition of $K_{n_1+n_2}$ into $K_{n_1}$ and $K_{n_2}$
+such that the red $K_s$ has $s-1$ vertices in $K_{n_1}$ (or the blue $K_t$ has $t-1$ vertices in $K_{n_2}$).
+This is an additional constraint which is not fullfilled for every colouring.
+Also, it focuses only on a red $K_{s-1}$ in $K_{n_1}$ and a blue $K_{t-1}$ in $K_{n_2}$ and ignores anything else.
+The $K_s$ (or the $K_t$) may be spread differently on the two parts.
