@@ -21,7 +21,6 @@ for $k \geq 1$.
 This condition brings so much less constraint to the problem that there is no more contraint and any $n$ (except 0) satisfies it.
 If some $s_i$ is zero, \textit{i.e.} if add even less constraint, really any $n$ is acceptable and $R_k(0,\dots) = 0$.
 
-
 The situation is similar for hypergraphs made of all \emph{r-tuples} on a set $X$ and noted $X^{(r)}$.
 We just have to replace 2 by $r$ and 1 by $\min_i s_i < r$.
 Previous equation generalizes as follows
@@ -32,9 +31,11 @@ Previous equation generalizes as follows
     R_k^{(r)}(s_1,\dots,s_1) & = \min_i s_i \qquad \text{if} \min_i s_i < r .
 \end{align}
 
-The case $r = 1$ is difficult to picture if we think of (hyper) graphs as (generalized) lines between points. However, if we think of $r$-sets, it becomes very natural.
+The case $r = 1$ is difficult to picture if we think of (hyper) graphs as (generalized) lines between points.
+However, if we think of $r$-sets, it becomes very natural: $X^{(1)}$ is made of all singletons of $X$.
 The Ramsey number for 2-colourings of $X^{(1)}$ is $s+t-1$, which generalize too
 \begin{equation}
+    \label{eq:ramseyLimitR1}
     R_k^{(1)}(s_1,\dots,s_k) = s_1 + \dots + s_k - k + 1
 \end{equation}
 and satifies equations (\ref{eq:ramseyLimitR}) and (\ref{eq:ramseyLimitMin}).
@@ -43,7 +44,7 @@ and satifies equations (\ref{eq:ramseyLimitR}) and (\ref{eq:ramseyLimitMin}).
 
 Here is how I tried to prove the first part of theorem 1.
 
-Let's consider two 2-colourings on $K_{n_1}$ and $K_{n_2}$ with $n_1 = R(s-1,t)$ and $n_2 = R(s,t-1)$ and build a 2-colouring on $K_{n_1 + n_2}$ from them.
+Let's assume that $R(s-1,t)$ and $R(s,t-1)$ are finite. Let's consider two 2-colourings on $K_{n_1}$ and $K_{n_2}$ with $n_1 = R(s-1,t)$ and $n_2 = R(s,t-1)$ and build a 2-colouring on $K_{n_1 + n_2}$ from them.
 If the first graph contains a blue subgraph of size $t$ or the second graph contains a red subgraph of size $s$ then we are done.
 Otherwise, they contain respectively a red subgraph of size $s-1$ and a blue subgraph of size $t-1$.
 I now want to prove that when we connect graphs $K_{n_1}$ and $K_{n_2}$,
@@ -139,3 +140,41 @@ Now let's assume it holds for any $s'_i > 2$ such that $s'_1+s'_2+s'_3 < s_1+s_2
     \right) , \nonumber
 \end{equation}
 where $s=s_1+s_2+s_3$, the inequality holds.
+The same proof should work for any $k$.
+
+\medskip
+
+Another way of proving that $R_k$ is finite is by colour grouping as shown after the proof of theorem 1.
+And since there are several ways of grouping colours, there are several upper bounds
+\begin{align}
+    R_k(s_1,\dots,s_k) & \leq R_{k-1}(R(s_1,s_2),\dots,s_k) \\
+    R_k(s_1,\dots,s_k) & \leq R_{k-2}(R_3(s_1,s_2,s_3),\dots,s_k)) \\
+    \dots \nonumber \\
+    R_k(s_1,\dots,s_k) & \leq R(R_{k-1}(s_1,\dots,s_{k-1}),s_k) .
+\end{align}
+Which are the best upper bounds? One of these? Or the one obtained by generalizing the proof of theorem 1 to $k$-colourings?
+Note that for $k=2$, the inequality is an equality
+\begin{equation}
+    R_2(s_1,s_2) = R_1(R_2(s_1,s_2)) .
+\end{equation}
+However it is a useless equality.
+
+\subsection{Theorem 2}
+
+Theorem 2 is a generalization of the first part of theorem 1 to hypergraphs.
+The two proofs are indeed very similar.
+But to make it even more obvious let's rewrite the first  part of theorem 1 as
+\begin{equation}
+    R(s,t) \leq R^{(1)}(R(s-1,t)+R(s,t-1))+1
+    \nonumber
+\end{equation}
+thanks to equation (\ref{eq:ramseyLimitR1}).
+The proof of theorem 2 is then identical to the one of theorem 1 with $r=2$.
+
+I can see no (at least no obvious) generalization of the second part of theorem 1.
+Indeed, this was based on the fact that the upper bound of $R(s,t)$ follows the same recursion relation as the binomial coefficients.
+But I cannot see any obvious generalization of the binomial coefficients obeying the same recursion relation as the upper bound of $R^{(2)}(s,t)$.
+
+\medskip
+
+Let's now derive upper bounds of $R_k^{(r)}$ by colour grouping and by generalizing theorem 2 (cf. Exercise 8).
