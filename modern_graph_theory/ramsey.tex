@@ -33,7 +33,7 @@ Previous equation generalizes as follows
 
 The case $r = 1$ is difficult to picture if we think of (hyper) graphs as (generalized) lines between points.
 However, if we think of $r$-sets, it becomes very natural: $X^{(1)}$ is made of all singletons of $X$.
-The Ramsey number for 2-colourings of $X^{(1)}$ is $s+t-1$, which generalize too
+The Ramsey number for 2-colourings of $X^{(1)}$ is $s+t-1$, which generalizes to
 \begin{equation}
     \label{eq:ramseyLimitR1}
     R_k^{(1)}(s_1,\dots,s_k) = s_1 + \dots + s_k - k + 1
@@ -73,6 +73,7 @@ The generalization of the first part of the theorem (and its proof) to the case 
 Let's try to generalize the second part of the theorem to k-colourings too.
 I'm expecting
 \begin{equation}
+    \label{eq:generalRamseyUpperBoundMultinomial}
     R_k(s_1,\dots,s_k) \leq
     \left(
     \begin{matrix}
@@ -147,17 +148,22 @@ The same proof should work for any $k$.
 Another way of proving that $R_k$ is finite is by colour grouping as shown after the proof of theorem 1.
 And since there are several ways of grouping colours, there are several upper bounds
 \begin{align}
-    R_k(s_1,\dots,s_k) & \leq R_{k-1}(R(s_1,s_2),\dots,s_k) \\
+    R_k(s_1,\dots,s_k) & \leq R_{k-1}(R_2(s_1,s_2),\dots,s_k) \\
     R_k(s_1,\dots,s_k) & \leq R_{k-2}(R_3(s_1,s_2,s_3),\dots,s_k)) \\
     \dots \nonumber \\
-    R_k(s_1,\dots,s_k) & \leq R(R_{k-1}(s_1,\dots,s_{k-1}),s_k) .
+    R_k(s_1,\dots,s_k) & \leq R_2(R_{k-1}(s_1,\dots,s_{k-1}),s_k) ,
 \end{align}
-Which are the best upper bounds? One of these? Or the one obtained by generalizing the proof of theorem 1 to $k$-colourings?
+and these are not all possible combinations.
 Note that for $k=2$, the inequality is an equality
 \begin{equation}
     R_2(s_1,s_2) = R_1(R_2(s_1,s_2)) .
 \end{equation}
 However it is a useless equality.
+Which are the best upper bounds? One of these? Or the one obtained by generalizing the proof of theorem 1 to $k$-colourings?
+Intuitively I would say that equation (\ref{eq:generalRamseyUpperBound}) is the best upper bound.
+By construction equation (\ref{eq:generalRamseyUpperBoundMultinomial}) cannot be better.
+And other upper bounds are made of a fast-growing function calling another fast-growing function in its arguments:
+they are probably very fast-growing function.
 
 \subsection{Theorem 2}
 
@@ -165,7 +171,7 @@ Theorem 2 is a generalization of the first part of theorem 1 to hypergraphs.
 The two proofs are indeed very similar.
 But to make it even more obvious let's rewrite the first  part of theorem 1 as
 \begin{equation}
-    R(s,t) \leq R^{(1)}(R(s-1,t)+R(s,t-1))+1
+    R^{(2)}(s,t) \leq R^{(1)}(R^{(2)}(s-1,t)+R^{(2)}(s,t-1))+1
     \nonumber
 \end{equation}
 thanks to equation (\ref{eq:ramseyLimitR1}).
@@ -173,8 +179,38 @@ The proof of theorem 2 is then identical to the one of theorem 1 with $r=2$.
 
 I can see no (at least no obvious) generalization of the second part of theorem 1.
 Indeed, this was based on the fact that the upper bound of $R(s,t)$ follows the same recursion relation as the binomial coefficients.
-But I cannot see any obvious generalization of the binomial coefficients obeying the same recursion relation as the upper bound of $R^{(2)}(s,t)$.
+But I cannot see any obvious generalization of the binomial coefficients obeying the same recursion relation as the upper bound of $R^{(r)}(s,t)$.
 
 \medskip
 
 Let's now derive upper bounds of $R_k^{(r)}$ by colour grouping and by generalizing theorem 2 (cf. Exercise 8).
+
+Colour grouping is done the same way as for graphs. We thus obtain the same inequalities
+\begin{equation}
+    R_k^{(r)}(s_1,\dots,s_k) \leq R_{k-1}^{(r)}(R_2^{(r)}(s_1,s_2),\dots,s_k) .
+\end{equation}
+As for graphs, the grouping of colours can be done in several ways so there are several upper bounds.
+
+The generalization of the proof of theorem 2 looks like this.
+Let $X$ be a set such as $\left|X\right| = R_k^{(r-1)}(R_k^{(r)}(s_1-1,\dots),\dots,R_k^{(r)}(\dots,s_k-1))+1$ and $c$ a $k$-colouring on $X^{(r)}$
+and let $x$ be an element of $X$.
+Let $Y$ be the set $X \setminus \{x\}$.
+Colouring $c$ induces a colouring $c'$ on $Y^{(r-1)}$ such that the colour of $\sigma \in Y^{(r-1)}$ in $c'$ is the colour of $\sigma \cup \{x\} \in X^{(r)}$ in $c$.
+By construction of $Y$, there is a monochromatic $r-1$-set $Z \subset Y$ with size $R_k^{r}(s_1\dots,s_i-1,\dots,s_k)$ with colour $i$ for colouring $c'$.
+Let's now move back to colouring $c$ and more precisely to its restriction to $Z^{(r)}$.
+$Z^{(r)}$ either has a monochromatic $r$-set with colour $j \neq i$ and size $s_j$, in which case we are done, or a monochromatic $r$-set with colour $i$ and size $s_i-1$.
+In the second case, $Z \cup \{x\}$ is a monochromatic $r$-set with colour $i$ in $c$.
+Which proves
+\begin{multline}
+    R_k^{(r)}(s_1,\dots,s_k)) \leq \\
+    R_k^{(r-1)}(R_k^{(r)}(s_1-1,\dots),\dots,R_k^{(r)}(\dots,s_k-1)) + 1 .
+\end{multline}
+
+To better understand this proof I need at least one example with $r=3$.
+Let's assume we have a red 2-set $\{z_1,z_2,z_3\}$.
+This means that we have red sets $\{z_1,z_2\}$, $\{z_1,z_3\}$ and $\{z_2,z_3\}$ in $c'$.
+In $c$, we thus have these red sets: $\{x,z_1,z_2\}$, $\{x,z_1,z_3\}$ and $\{x,z_2,z_3\}$.
+However these are not enough for $\{x,z_1,z_2,z_3\}$ to be a red 3-set.
+Indeed, the red set $\{z_1,z_2,z_3\}$ must be present too.
+That's why, once we have found a monochromatic (for colouring $c'$)) $r-1$-set $Z$ we still have to find a monochromatic (for $c$) $r$-set inside $Z$.
+And that's why set $Z$ must be quite big.
